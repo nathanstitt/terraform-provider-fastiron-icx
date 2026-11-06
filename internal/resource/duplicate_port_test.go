@@ -24,7 +24,7 @@ func planEth(t *testing.T, reg *providerdata.PortRegistry, cfg, state *Interface
 	r, _ := newEthResource(t, "7250-24")
 	r.ports = reg
 	s, p := ethStateAndPlan(t, r, state, cfg)
-	config := tfsdk.Config{Schema: p.Schema, Raw: p.Raw}
+	config := tfsdk.Config(p)
 	if destroy {
 		p = nullPlan(p)
 	}

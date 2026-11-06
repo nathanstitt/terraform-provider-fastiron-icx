@@ -644,8 +644,8 @@ func nullState(t *testing.T, r *ManagementIPResource) tfsdk.State {
 // Destroy plans always pass, even on a router image.
 func TestManagementIPModifyPlan_DestroyAllowed(t *testing.T) {
 	r, _ := newMgmtResource(t, "7250-24", "08.0.95mT213", parser.ImageTypeRouter)
-	state, plan := mgmtStateAndPlan(t, r, mgmtModel("10.0.20.5/24", types.StringNull(), strList(), false), nil)
-	plan = nullPlan(tfsdk.Plan{Schema: state.Schema})
+	state, _ := mgmtStateAndPlan(t, r, mgmtModel("10.0.20.5/24", types.StringNull(), strList(), false), nil)
+	plan := nullPlan(tfsdk.Plan{Schema: state.Schema})
 	resp := resource.ModifyPlanResponse{Plan: plan}
 	r.ModifyPlan(context.Background(), resource.ModifyPlanRequest{Plan: plan, State: state}, &resp)
 	if resp.Diagnostics.HasError() {

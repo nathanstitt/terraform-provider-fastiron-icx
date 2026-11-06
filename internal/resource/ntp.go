@@ -283,7 +283,7 @@ func (r *NTPResource) ImportState(ctx context.Context, req resource.ImportStateR
 func (r *NTPResource) buildCommands(ctx context.Context, plan, state *NTPResourceModel, diags *diag.Diagnostics) []string {
 	var commands []string
 
-	var stateTZ types.String = types.StringNull()
+	stateTZ := types.StringNull()
 	var stateSummer, stateServe = false, true
 	var stateServers []string
 	if state != nil {

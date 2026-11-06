@@ -126,7 +126,8 @@ func TestHashCommandsCollisionResistance(t *testing.T) {
 	}
 
 	// Same commands must stay deterministic.
-	if hashCommands([]string{"x", "y"}) != hashCommands([]string{"x", "y"}) {
+	first, second := hashCommands([]string{"x", "y"}), hashCommands([]string{"x", "y"})
+	if first != second {
 		t.Error("hashCommands is not deterministic")
 	}
 

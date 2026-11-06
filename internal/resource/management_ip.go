@@ -367,7 +367,7 @@ func (r *ManagementIPResource) Read(ctx context.Context, req resource.ReadReques
 	// dns_servers = [] (all removed) and "none on the device" are the same
 	// thing; keep the configured empty list rather than flipping it to null,
 	// which would show a diff on every plan.
-	if !(device.DNSServers.IsNull() && isEmptyKnownList(state.DNSServers)) {
+	if !device.DNSServers.IsNull() || !isEmptyKnownList(state.DNSServers) {
 		state.DNSServers = device.DNSServers
 	}
 	// Terraform-only; nothing on the device to read it from.
